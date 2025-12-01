@@ -130,6 +130,26 @@ class ZmanimRepositoryImpl @Inject constructor(
 
     override fun getAvailableLocations(): List<GeoLocation> = GeoLocation.ALL_LOCATIONS
 
+    override suspend fun getHebrewDate(): String = withContext(Dispatchers.Default) {
+        val jewishCalendar = createJewishCalendar(LocalDate.now())
+        val hebrewDate = convertToHebrewDate(jewishCalendar)
+        hebrewDate.toHebrewString()
+    }
+
+    override suspend fun getNextZman(): ZmanInfo? = withContext(Dispatchers.Default) {
+        val location = GeoLocation.JERUSALEM // Default for now
+        val zman = getNextZman(location, ZmanimCalculationMethod.GRA)
+        zman?.let { z ->
+            z.time?.let { time ->
+                ZmanInfo(
+                    name = z.hebrewName,
+                    timeFormatted = String.format("%02d:%02d", time.hour, time.minute),
+                    time = time
+                )
+            }
+        }
+    }
+
     // Helper functions
 
     private fun createZmanimCalendar(date: LocalDate, location: GeoLocation): ZmanimCalendar {

@@ -59,4 +59,14 @@ interface ZmanimRepository {
      * Get all available locations
      */
     fun getAvailableLocations(): List<GeoLocation>
+
+    /**
+     * Get Hebrew date string for today (convenience method)
+     */
+    suspend fun getHebrewDate(): String
+
+    /**
+     * Get next zman as ZmanInfo for display (convenience method)
+     */
+    suspend fun getNextZman(): ZmanInfo?
 }

@@ -5,11 +5,13 @@ import com.jewishhome.app.data.local.preferences.UserPreferences
 import com.jewishhome.app.data.repository.CalendarRepositoryImpl
 import com.jewishhome.app.data.repository.ContactsRepositoryImpl
 import com.jewishhome.app.data.repository.MusicRepositoryImpl
+import com.jewishhome.app.data.repository.PhotosRepositoryImpl
 import com.jewishhome.app.data.repository.TextsRepositoryImpl
 import com.jewishhome.app.data.repository.ZmanimRepositoryImpl
 import com.jewishhome.app.domain.repository.CalendarRepository
 import com.jewishhome.app.domain.repository.ContactsRepository
 import com.jewishhome.app.domain.repository.MusicRepository
+import com.jewishhome.app.domain.repository.PhotosRepository
 import com.jewishhome.app.domain.repository.TextsRepository
 import com.jewishhome.app.domain.repository.ZmanimRepository
 import dagger.Module
@@ -72,5 +74,14 @@ object AppModule {
         userPreferences: UserPreferences
     ): TextsRepository {
         return TextsRepositoryImpl(userPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun providePhotosRepository(
+        @ApplicationContext context: Context,
+        userPreferences: UserPreferences
+    ): PhotosRepository {
+        return PhotosRepositoryImpl(context, userPreferences)
     }
 }

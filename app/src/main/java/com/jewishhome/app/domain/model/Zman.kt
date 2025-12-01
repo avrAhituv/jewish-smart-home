@@ -60,3 +60,12 @@ data class ShabbatTimes(
     val isYomTov: Boolean,
     val holidayName: String? = null
 )
+
+/**
+ * Simple zman info for UI display
+ */
+data class ZmanInfo(
+    val name: String,
+    val timeFormatted: String,
+    val time: LocalDateTime?
+)
