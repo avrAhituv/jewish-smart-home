@@ -2,64 +2,129 @@ package com.jewishhome.app.presentation.screens.zmanim
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jewishhome.app.domain.model.*
+import com.jewishhome.app.domain.repository.ZmanimRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 data class ZmanimUiState(
     val location: String = "ירושלים",
-    val hebrewDate: String = "יום שני כ\"ח כסלו תשפ\"ה",
+    val hebrewDate: String = "",
     val zmanim: List<ZmanItem> = emptyList(),
-    val candleLighting: String = "יום שישי 16:22",
-    val shabbatEnds: String = "מוצ\"ש 17:32",
-    val parasha: String = "מקץ",
-    val isLoading: Boolean = false,
-    val error: String? = null
+    val candleLighting: String = "",
+    val shabbatEnds: String = "",
+    val parasha: String = "",
+    val isLoading: Boolean = true,
+    val error: String? = null,
+    val availableLocations: List<GeoLocation> = emptyList()
 )
 
 @HiltViewModel
 class ZmanimViewModel @Inject constructor(
-    // TODO: Inject ZmanimRepository
+    private val zmanimRepository: ZmanimRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ZmanimUiState())
     val uiState: StateFlow<ZmanimUiState> = _uiState.asStateFlow()
 
+    private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+
+    private var currentLocation: GeoLocation = GeoLocation.JERUSALEM
+
     init {
-        loadZmanim()
+        loadAvailableLocations()
+        observeLocation()
     }
 
-    private fun loadZmanim() {
-        viewModelScope.launch {
-            // TODO: Load from repository using KosherJava
-            // For now, use placeholder data
-            _uiState.value = _uiState.value.copy(
-                zmanim = listOf(
-                    ZmanItem("עלות השחר", "05:12", isPassed = true),
-                    ZmanItem("נץ החמה", "06:32", isPassed = true),
-                    ZmanItem("סוז\"ק מג\"א", "08:47", isPassed = true),
-                    ZmanItem("סוז\"ק גר\"א", "09:23", isPassed = true),
-                    ZmanItem("סוז\"ת", "10:14", isPassed = true),
-                    ZmanItem("חצות", "11:37", isPassed = true),
-                    ZmanItem("מנחה גדולה", "12:04", isPassed = true),
-                    ZmanItem("פלג המנחה", "15:51", isPassed = false),
-                    ZmanItem("שקיעה", "16:42", isPassed = false, isCurrent = true),
-                    ZmanItem("צאת הכוכבים", "17:12", isPassed = false),
-                    ZmanItem("צאת ר\"ת", "17:54", isPassed = false)
-                )
-            )
+    private fun loadAvailableLocations() {
+        _uiState.update { state ->
+            state.copy(availableLocations = zmanimRepository.getAvailableLocations())
         }
+    }
+
+    private fun observeLocation() {
+        viewModelScope.launch {
+            zmanimRepository.getCurrentLocation()
+                .collect { location ->
+                    currentLocation = location
+                    _uiState.update { it.copy(location = location.hebrewName) }
+                    loadZmanim()
+                }
+        }
+    }
+
+    fun loadZmanim() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, error = null) }
+
+            try {
+                val today = LocalDate.now()
+                val now = LocalDateTime.now()
+
+                // Get daily zmanim
+                val dailyZmanim = zmanimRepository.getDailyZmanim(
+                    date = today,
+                    location = currentLocation
+                )
+
+                // Get Shabbat times
+                val shabbatTimes = zmanimRepository.getShabbatTimes(
+                    date = today,
+                    location = currentLocation
+                )
+
+                // Convert to display items
+                val displayItems = dailyZmanim.zmanim.map { zman ->
+                    val isPassed = zman.time?.isBefore(now) == true
+                    val isNext = !isPassed && dailyZmanim.zmanim
+                        .filter { it.time?.isAfter(now) == true }
+                        .minByOrNull { it.time!! }?.type == zman.type
+
+                    ZmanItem(
+                        name = zman.hebrewName,
+                        time = zman.time?.format(timeFormatter) ?: "--:--",
+                        isPassed = isPassed,
+                        isCurrent = isNext
+                    )
+                }
+
+                _uiState.update { state ->
+                    state.copy(
+                        hebrewDate = dailyZmanim.hebrewDate.toFullHebrewString(),
+                        zmanim = displayItems,
+                        candleLighting = formatShabbatTime("יום שישי", shabbatTimes.candleLighting),
+                        shabbatEnds = formatShabbatTime("מוצ\"ש", shabbatTimes.shabbatEnds),
+                        parasha = shabbatTimes.parasha ?: "",
+                        isLoading = false
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.update { state ->
+                    state.copy(
+                        isLoading = false,
+                        error = e.message ?: "שגיאה בטעינת הזמנים"
+                    )
+                }
+            }
+        }
+    }
+
+    private fun formatShabbatTime(prefix: String, time: LocalDateTime?): String {
+        return time?.let { "$prefix ${it.format(timeFormatter)}" } ?: ""
     }
 
     fun refreshZmanim() {
         loadZmanim()
     }
 
-    fun setLocation(location: String) {
-        _uiState.value = _uiState.value.copy(location = location)
-        loadZmanim()
+    fun setLocation(location: GeoLocation) {
+        viewModelScope.launch {
+            zmanimRepository.saveLocation(location)
+        }
     }
 }

@@ -68,6 +68,7 @@ fun HomeScreen(
             InfoBar(
                 nextZman = uiState.nextZman,
                 nextZmanTime = uiState.nextZmanTime,
+                timeUntilNextZman = uiState.timeUntilNextZman,
                 todayEvent = uiState.todayEvent
             )
 
@@ -139,6 +140,7 @@ private fun ClockSection(
 private fun InfoBar(
     nextZman: String,
     nextZmanTime: String,
+    timeUntilNextZman: String,
     todayEvent: String?
 ) {
     Row(
@@ -167,11 +169,21 @@ private fun InfoBar(
                     style = MaterialTheme.typography.bodyLarge,
                     color = Color.White
                 )
-                Text(
-                    text = nextZmanTime,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = Secondary
-                )
+                Row {
+                    Text(
+                        text = nextZmanTime,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = Secondary
+                    )
+                    if (timeUntilNextZman.isNotEmpty()) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = timeUntilNextZman,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White.copy(alpha = 0.7f)
+                        )
+                    }
+                }
             }
         }
 

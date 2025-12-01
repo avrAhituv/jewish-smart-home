@@ -1,6 +1,9 @@
 package com.jewishhome.app.di
 
 import android.content.Context
+import com.jewishhome.app.data.local.preferences.UserPreferences
+import com.jewishhome.app.data.repository.ZmanimRepositoryImpl
+import com.jewishhome.app.domain.repository.ZmanimRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +19,15 @@ object AppModule {
     @Singleton
     fun provideContext(@ApplicationContext context: Context): Context = context
 
-    // TODO: Add repository providers
-    // TODO: Add database providers
-    // TODO: Add network providers
+    @Provides
+    @Singleton
+    fun provideUserPreferences(@ApplicationContext context: Context): UserPreferences {
+        return UserPreferences(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideZmanimRepository(userPreferences: UserPreferences): ZmanimRepository {
+        return ZmanimRepositoryImpl(userPreferences)
+    }
 }
