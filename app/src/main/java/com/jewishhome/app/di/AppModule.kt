@@ -2,7 +2,9 @@ package com.jewishhome.app.di
 
 import android.content.Context
 import com.jewishhome.app.data.local.preferences.UserPreferences
+import com.jewishhome.app.data.repository.MusicRepositoryImpl
 import com.jewishhome.app.data.repository.ZmanimRepositoryImpl
+import com.jewishhome.app.domain.repository.MusicRepository
 import com.jewishhome.app.domain.repository.ZmanimRepository
 import dagger.Module
 import dagger.Provides
@@ -29,5 +31,14 @@ object AppModule {
     @Singleton
     fun provideZmanimRepository(userPreferences: UserPreferences): ZmanimRepository {
         return ZmanimRepositoryImpl(userPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMusicRepository(
+        @ApplicationContext context: Context,
+        userPreferences: UserPreferences
+    ): MusicRepository {
+        return MusicRepositoryImpl(context, userPreferences)
     }
 }

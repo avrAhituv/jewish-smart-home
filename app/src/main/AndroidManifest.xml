@@ -69,10 +69,10 @@
             </intent-filter>
         </activity>
 
-        <!-- Music Service -->
+        <!-- Music Playback Service -->
         <service
-            android:name=".service.MusicService"
-            android:exported="false"
+            android:name=".data.service.MusicPlaybackService"
+            android:exported="true"
             android:foregroundServiceType="mediaPlayback">
             <intent-filter>
                 <action android:name="androidx.media3.session.MediaSessionService" />
