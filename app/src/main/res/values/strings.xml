@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">בית יהודי</string>
+    <string name="app_name_english">Jewish Home</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">בית</string>
+    <string name="nav_zmanim">זמנים</string>
+    <string name="nav_music">נגן</string>
+    <string name="nav_contacts">אלפון</string>
+    <string name="nav_calendar">לוח שנה</string>
+    <string name="nav_recipes">מתכונים</string>
+    <string name="nav_texts">ברכות</string>
+    <string name="nav_photos">תמונות</string>
+    <string name="nav_settings">הגדרות</string>
+
+    <!-- Home Screen -->
+    <string name="next_zman">הזמן הקרוב</string>
+    <string name="today_events">היום</string>
+    <string name="shabbat_times">זמני שבת</string>
+
+    <!-- Zmanim -->
+    <string name="zmanim_title">זמני היום</string>
+    <string name="alot_hashachar">עלות השחר</string>
+    <string name="misheyakir">משיכיר</string>
+    <string name="netz">נץ החמה</string>
+    <string name="sof_zman_shma_mga">סוז"ק מג"א</string>
+    <string name="sof_zman_shma_gra">סוז"ק גר"א</string>
+    <string name="sof_zman_tefila_mga">סוז"ת מג"א</string>
+    <string name="sof_zman_tefila_gra">סוז"ת גר"א</string>
+    <string name="chatzot">חצות היום</string>
+    <string name="mincha_gedola">מנחה גדולה</string>
+    <string name="mincha_ketana">מנחה קטנה</string>
+    <string name="plag_hamincha">פלג המנחה</string>
+    <string name="shkia">שקיעה</string>
+    <string name="tzait">צאת הכוכבים</string>
+    <string name="tzait_rt">צאת ר"ת</string>
+    <string name="chatzot_layla">חצות הלילה</string>
+
+    <!-- Shabbat -->
+    <string name="candle_lighting">כניסת שבת</string>
+    <string name="shabbat_ends">צאת שבת</string>
+    <string name="parasha">פרשת השבוע</string>
+
+    <!-- Music -->
+    <string name="music_title">נגן מוזיקה</string>
+    <string name="artists">אמנים</string>
+    <string name="albums">אלבומים</string>
+    <string name="songs">שירים</string>
+    <string name="playlists">פלייליסטים</string>
+    <string name="folders">תיקיות</string>
+    <string name="no_music_found">לא נמצאו שירים</string>
+    <string name="now_playing">מתנגן כעת</string>
+
+    <!-- Contacts -->
+    <string name="contacts_title">אלפון</string>
+    <string name="favorites">מועדפים</string>
+    <string name="all_contacts">כל אנשי הקשר</string>
+    <string name="search_contacts">חיפוש אנשי קשר</string>
+    <string name="no_contacts">לא נמצאו אנשי קשר</string>
+    <string name="call">התקשר</string>
+
+    <!-- Calendar -->
+    <string name="calendar_title">לוח שנה</string>
+    <string name="today">היום</string>
+    <string name="this_week">השבוע</string>
+    <string name="this_month">החודש</string>
+    <string name="no_events">אין אירועים</string>
+
+    <!-- Recipes -->
+    <string name="recipes_title">מתכונים</string>
+    <string name="saved_recipes">מתכונים שמורים</string>
+    <string name="blocked_site">אתר זה אינו ברשימה המורשית</string>
+
+    <!-- Texts/Brachot -->
+    <string name="texts_title">ברכות וטקסטים</string>
+    <string name="birkat_hamazon">ברכת המזון</string>
+    <string name="asher_yatzar">אשר יצר</string>
+    <string name="tefilat_haderech">תפילת הדרך</string>
+    <string name="brachot_hanehenin">ברכות הנהנין</string>
+    <string name="tehilim">תהילים</string>
+    <string name="kiddush">קידוש והבדלה</string>
+    <string name="special_prayers">תפילות מיוחדות</string>
+
+    <!-- Nusach -->
+    <string name="nusach_ashkenaz">אשכנז</string>
+    <string name="nusach_sfard">ספרד</string>
+    <string name="nusach_edot_hamizrach">עדות המזרח</string>
+
+    <!-- Photos -->
+    <string name="photos_title">תמונות</string>
+    <string name="all_photos">כל התמונות</string>
+    <string name="photo_albums">אלבומים</string>
+    <string name="slideshow">מצגת</string>
+    <string name="set_as_background">הגדר כרקע</string>
+
+    <!-- Settings -->
+    <string name="settings_title">הגדרות</string>
+    <string name="general_settings">הגדרות כלליות</string>
+    <string name="zmanim_settings">הגדרות זמנים</string>
+    <string name="music_settings">הגדרות מוזיקה</string>
+    <string name="display_settings">הגדרות תצוגה</string>
+    <string name="kiosk_settings">הגדרות קיוסק</string>
+    <string name="about">אודות</string>
+    <string name="enter_pin">הזן קוד PIN</string>
+    <string name="wrong_pin">קוד שגוי</string>
+
+    <!-- Location -->
+    <string name="location">מיקום</string>
+    <string name="jerusalem">ירושלים</string>
+    <string name="tel_aviv">תל אביב</string>
+    <string name="haifa">חיפה</string>
+    <string name="beer_sheva">באר שבע</string>
+
+    <!-- Days of week -->
+    <string name="sunday">יום ראשון</string>
+    <string name="monday">יום שני</string>
+    <string name="tuesday">יום שלישי</string>
+    <string name="wednesday">יום רביעי</string>
+    <string name="thursday">יום חמישי</string>
+    <string name="friday">יום שישי</string>
+    <string name="saturday">שבת</string>
+
+    <!-- Common -->
+    <string name="ok">אישור</string>
+    <string name="cancel">ביטול</string>
+    <string name="save">שמור</string>
+    <string name="delete">מחק</string>
+    <string name="back">חזרה</string>
+    <string name="search">חיפוש</string>
+    <string name="refresh">רענן</string>
+    <string name="loading">טוען…</string>
+    <string name="error">שגיאה</string>
+    <string name="retry">נסה שוב</string>
+
+    <!-- Screensaver -->
+    <string name="touch_to_exit">גע במסך כדי לחזור</string>
+</resources>
