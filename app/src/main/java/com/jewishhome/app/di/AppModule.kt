@@ -2,8 +2,10 @@ package com.jewishhome.app.di
 
 import android.content.Context
 import com.jewishhome.app.data.local.preferences.UserPreferences
+import com.jewishhome.app.data.repository.ContactsRepositoryImpl
 import com.jewishhome.app.data.repository.MusicRepositoryImpl
 import com.jewishhome.app.data.repository.ZmanimRepositoryImpl
+import com.jewishhome.app.domain.repository.ContactsRepository
 import com.jewishhome.app.domain.repository.MusicRepository
 import com.jewishhome.app.domain.repository.ZmanimRepository
 import dagger.Module
@@ -40,5 +42,14 @@ object AppModule {
         userPreferences: UserPreferences
     ): MusicRepository {
         return MusicRepositoryImpl(context, userPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideContactsRepository(
+        @ApplicationContext context: Context,
+        userPreferences: UserPreferences
+    ): ContactsRepository {
+        return ContactsRepositoryImpl(context, userPreferences)
     }
 }
