@@ -48,6 +48,9 @@ class UserPreferences @Inject constructor(
 
         // Nusach
         private val NUSACH = stringPreferencesKey("nusach") // "ashkenaz", "sfard", "edot_hamizrach"
+
+        // Font Size for texts
+        private val FONT_SIZE = floatPreferencesKey("font_size")
     }
 
     // Location
@@ -188,12 +191,23 @@ class UserPreferences @Inject constructor(
 
     // Nusach
     val nusach: Flow<String> = dataStore.data.map { preferences ->
-        preferences[NUSACH] ?: "sfard"
+        preferences[NUSACH] ?: "ASHKENAZ"
     }
 
     suspend fun setNusach(nusach: String) {
         dataStore.edit { preferences ->
             preferences[NUSACH] = nusach
+        }
+    }
+
+    // Font Size
+    val fontSize: Flow<Float> = dataStore.data.map { preferences ->
+        preferences[FONT_SIZE] ?: 20f
+    }
+
+    suspend fun setFontSize(size: Float) {
+        dataStore.edit { preferences ->
+            preferences[FONT_SIZE] = size
         }
     }
 }
