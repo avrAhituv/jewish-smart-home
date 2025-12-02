@@ -240,7 +240,7 @@ private fun LocationCard(
                     color = Color.White
                 )
                 Text(
-                    "${location.country} • ${String.format("%.2f", location.latitude)}°N",
+                    "${location.hebrewName} • ${String.format("%.2f", location.latitude)}°N",
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.White.copy(alpha = 0.7f)
                 )

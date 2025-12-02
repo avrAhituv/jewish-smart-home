@@ -103,8 +103,10 @@ class MusicRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun deletePlaylist(id: String) = withContext(Dispatchers.IO) {
-        playlistsCache.removeAll { it.id == id }
+    override suspend fun deletePlaylist(id: String) {
+        withContext(Dispatchers.IO) {
+            playlistsCache.removeAll { it.id == id }
+        }
     }
 
     override suspend fun getArtists(): List<String> = withContext(Dispatchers.IO) {

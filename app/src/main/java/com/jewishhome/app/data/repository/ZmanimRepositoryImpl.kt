@@ -86,7 +86,7 @@ class ZmanimRepositoryImpl @Inject constructor(
             }.time
         }
 
-        val shabbatEnds = saturdayCalendar.tzaisGeonim8Point5Degrees
+        val shabbatEnds = saturdayCalendar.tzais72
 
         ShabbatTimes(
             candleLighting = candleLighting?.toLocalDateTime(),
@@ -188,7 +188,7 @@ class ZmanimRepositoryImpl @Inject constructor(
     ): List<Zman> {
         return listOfNotNull(
             createZman(ZmanType.ALOT_HASHACHAR, calendar.alos72),
-            createZman(ZmanType.MISHEYAKIR, calendar.misheyakir10Point2Degrees),
+            createZman(ZmanType.MISHEYAKIR, calendar.misheyakir11Degrees),
             createZman(ZmanType.NETZ_HACHAMA, calendar.sunrise),
             when (method) {
                 ZmanimCalculationMethod.MGA -> createZman(ZmanType.SOF_ZMAN_SHMA_MGA, calendar.sofZmanShmaMGA)
@@ -207,7 +207,7 @@ class ZmanimRepositoryImpl @Inject constructor(
             createZman(ZmanType.SHKIA, calendar.sunset),
             createZman(ZmanType.TZAIT_HAKOCHAVIM, calendar.tzais),
             createZman(ZmanType.TZAIT_RT, calendar.tzais72),
-            createZman(ZmanType.CHATZOT_LAYLA, calendar.solarMidnight)
+            createZman(ZmanType.CHATZOT_LAYLA, calendar.chatzosNight)
         ).sortedBy { it.type.order }
     }
 

@@ -134,12 +134,14 @@ class ContactsRepositoryImpl @Inject constructor(
         context.startActivity(intent)
     }
 
-    override suspend fun markAsContacted(contactId: String) = withContext(Dispatchers.IO) {
-        getContactById(contactId)?.let { contact ->
-            recentContactsCache.removeAll { it.id == contactId }
-            recentContactsCache.add(0, contact.copy(lastContacted = System.currentTimeMillis()))
-            while (recentContactsCache.size > 50) {
-                recentContactsCache.removeLast()
+    override suspend fun markAsContacted(contactId: String) {
+        withContext(Dispatchers.IO) {
+            getContactById(contactId)?.let { contact ->
+                recentContactsCache.removeAll { it.id == contactId }
+                recentContactsCache.add(0, contact.copy(lastContacted = System.currentTimeMillis()))
+                while (recentContactsCache.size > 50) {
+                    recentContactsCache.removeLast()
+                }
             }
         }
     }

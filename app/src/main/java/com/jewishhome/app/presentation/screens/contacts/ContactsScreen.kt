@@ -210,10 +210,16 @@ private fun ContactsTabs(
         contentColor = Color.White,
         edgePadding = 16.dp,
         indicator = { tabPositions ->
-            TabRowDefaults.Indicator(
-                Modifier.tabIndicatorOffset(tabPositions[tabs.indexOfFirst { it.first == selectedTab }]),
-                color = Secondary
-            )
+            if (tabPositions.isNotEmpty()) {
+                val selectedIndex = tabs.indexOfFirst { it.first == selectedTab }
+                TabRowDefaults.SecondaryIndicator(
+                    Modifier.fillMaxWidth()
+                        .wrapContentSize(Alignment.BottomStart)
+                        .offset(x = tabPositions[selectedIndex].left)
+                        .width(tabPositions[selectedIndex].width),
+                    color = Secondary
+                )
+            }
         }
     ) {
         tabs.forEach { (tab, title) ->

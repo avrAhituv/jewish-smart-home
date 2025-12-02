@@ -232,7 +232,7 @@ private fun RecipesBrowser(
         // Loading Progress
         if (uiState.loadingProgress in 1..99) {
             LinearProgressIndicator(
-                progress = { uiState.loadingProgress / 100f },
+                progress = uiState.loadingProgress / 100f,
                 modifier = Modifier.fillMaxWidth(),
                 color = Secondary
             )
