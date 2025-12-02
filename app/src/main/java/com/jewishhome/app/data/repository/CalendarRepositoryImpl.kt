@@ -374,24 +374,18 @@ class CalendarRepositoryImpl @Inject constructor(
     }
 
     private fun getHolidayName(jewishCal: JewishCalendar): String {
-        return when {
-            jewishCal.isPesach -> "פסח"
-            jewishCal.isShavuos -> "שבועות"
-            jewishCal.isRoshHashana -> "ראש השנה"
-            jewishCal.isYomKippur -> "יום כיפור"
-            jewishCal.isSukkos -> "סוכות"
-            jewishCal.isSimchasTorah -> "שמחת תורה"
-            jewishCal.isShminiAtzeres -> "שמיני עצרת"
-            jewishCal.isChanukah -> "חנוכה"
-            jewishCal.isPurim -> "פורים"
-            jewishCal.isRoshChodesh -> "ראש חודש"
-            jewishCal.isTaanis -> getTaanisName(jewishCal)
-            else -> hebrewFormatter.formatYomTov(jewishCal) ?: "חג"
-        }
+        // Use the Hebrew formatter to get the proper holiday name
+        return hebrewFormatter.formatYomTov(jewishCal)
+            ?: when {
+                jewishCal.isChanukah -> "חנוכה"
+                jewishCal.isPurim -> "פורים"
+                jewishCal.isRoshChodesh -> "ראש חודש"
+                jewishCal.isTaanis -> "תענית"
+                else -> "חג"
+            }
     }
 
     private fun getTaanisName(jewishCal: JewishCalendar): String {
-        // Return generic name for fast days - the formatter will provide the specific name
         return hebrewFormatter.formatYomTov(jewishCal) ?: "תענית"
     }
 
