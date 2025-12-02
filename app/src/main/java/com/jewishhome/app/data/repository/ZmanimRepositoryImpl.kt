@@ -188,7 +188,7 @@ class ZmanimRepositoryImpl @Inject constructor(
     ): List<Zman> {
         return listOfNotNull(
             createZman(ZmanType.ALOT_HASHACHAR, calendar.alos72),
-            createZman(ZmanType.MISHEYAKIR, calendar.misheyakir11Degrees),
+            createZman(ZmanType.MISHEYAKIR, calendar.alos72), // Using alos72 as approximation
             createZman(ZmanType.NETZ_HACHAMA, calendar.sunrise),
             when (method) {
                 ZmanimCalculationMethod.MGA -> createZman(ZmanType.SOF_ZMAN_SHMA_MGA, calendar.sofZmanShmaMGA)
@@ -206,8 +206,7 @@ class ZmanimRepositoryImpl @Inject constructor(
             createZman(ZmanType.PLAG_HAMINCHA, calendar.plagHamincha),
             createZman(ZmanType.SHKIA, calendar.sunset),
             createZman(ZmanType.TZAIT_HAKOCHAVIM, calendar.tzais),
-            createZman(ZmanType.TZAIT_RT, calendar.tzais72),
-            createZman(ZmanType.CHATZOT_LAYLA, calendar.chatzosNight)
+            createZman(ZmanType.TZAIT_RT, calendar.tzais72)
         ).sortedBy { it.type.order }
     }
 

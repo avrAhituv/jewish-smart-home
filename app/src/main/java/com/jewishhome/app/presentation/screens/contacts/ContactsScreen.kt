@@ -212,12 +212,14 @@ private fun ContactsTabs(
         indicator = { tabPositions ->
             if (tabPositions.isNotEmpty()) {
                 val selectedIndex = tabs.indexOfFirst { it.first == selectedTab }
-                TabRowDefaults.SecondaryIndicator(
-                    Modifier.fillMaxWidth()
+                Box(
+                    Modifier
+                        .fillMaxWidth()
                         .wrapContentSize(Alignment.BottomStart)
                         .offset(x = tabPositions[selectedIndex].left)
-                        .width(tabPositions[selectedIndex].width),
-                    color = Secondary
+                        .width(tabPositions[selectedIndex].width)
+                        .height(3.dp)
+                        .background(Secondary)
                 )
             }
         }

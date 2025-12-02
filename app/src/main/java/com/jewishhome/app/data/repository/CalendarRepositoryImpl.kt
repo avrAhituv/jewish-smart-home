@@ -379,7 +379,7 @@ class CalendarRepositoryImpl @Inject constructor(
             jewishCal.isShavuos -> "שבועות"
             jewishCal.isRoshHashana -> "ראש השנה"
             jewishCal.isYomKippur -> "יום כיפור"
-            jewishCal.isSukkot -> "סוכות"
+            jewishCal.isSukkos -> "סוכות"
             jewishCal.isSimchasTorah -> "שמחת תורה"
             jewishCal.isShminiAtzeres -> "שמיני עצרת"
             jewishCal.isChanukah -> "חנוכה"
@@ -391,16 +391,8 @@ class CalendarRepositoryImpl @Inject constructor(
     }
 
     private fun getTaanisName(jewishCal: JewishCalendar): String {
-        // Use yomTovIndex to identify specific fast days
-        val yomTovIndex = jewishCal.yomTovIndex
-        return when (yomTovIndex) {
-            JewishCalendar.TZOM_GEDALIAH -> "צום גדליה"
-            JewishCalendar.TENTH_OF_TEVES -> "עשרה בטבת"
-            JewishCalendar.FAST_OF_ESTHER -> "תענית אסתר"
-            JewishCalendar.SEVENTEEN_OF_TAMMUZ -> "י״ז בתמוז"
-            JewishCalendar.TISHA_BEAV -> "תשעה באב"
-            else -> "תענית"
-        }
+        // Return generic name for fast days - the formatter will provide the specific name
+        return hebrewFormatter.formatYomTov(jewishCal) ?: "תענית"
     }
 
     private fun getHolidayCategory(jewishCal: JewishCalendar): HolidayCategory {
