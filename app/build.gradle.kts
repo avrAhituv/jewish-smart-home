@@ -111,12 +111,6 @@ dependencies {
     // KosherJava for Zmanim
     implementation("com.kosherjava:zmanim:2.5.0")
 
-    // Google APIs
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("com.google.api-client:google-api-client-android:2.2.0")
-    implementation("com.google.apis:google-api-services-calendar:v3-rev20231123-2.0.0")
-    implementation("com.google.apis:google-api-services-people:v1-rev20231206-2.0.0")
-
     // Accompanist
     implementation("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
@@ -130,6 +124,7 @@ dependencies {
 
     // Testing
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
