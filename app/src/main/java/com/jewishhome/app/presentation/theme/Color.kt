@@ -38,3 +38,7 @@ val ZmanUpcoming = Color(0xFF1E3A5F)
 val Shabbat = Color(0xFF6B4BA1)
 val Chag = Color(0xFFD4AF37)
 val Tzom = Color(0xFF757575)
+
+// Text colors for better contrast
+val TextPrimary = Color(0xFF1C1B1F)
+val TextSecondary = Color(0xFF5F5E62)

@@ -263,7 +263,7 @@ private fun PermissionCard(
                 Icon(
                     item.icon,
                     contentDescription = null,
-                    tint = if (isGranted) Secondary else Color.White,
+                    tint = if (isGranted) Secondary else TextPrimary,
                     modifier = Modifier.size(24.dp)
                 )
             }
@@ -275,7 +275,7 @@ private fun PermissionCard(
                     Text(
                         item.title,
                         style = MaterialTheme.typography.titleMedium,
-                        color = Color.White,
+                        color = if (isGranted) Color.White else TextPrimary,
                         fontWeight = FontWeight.Medium
                     )
                     if (!item.isRequired) {
@@ -283,14 +283,14 @@ private fun PermissionCard(
                         Text(
                             "(אופציונלי)",
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.White.copy(alpha = 0.5f)
+                            color = if (isGranted) Color.White.copy(alpha = 0.5f) else TextSecondary
                         )
                     }
                 }
                 Text(
                     item.description,
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.White.copy(alpha = 0.7f)
+                    color = if (isGranted) Color.White.copy(alpha = 0.7f) else TextSecondary
                 )
             }
 
@@ -307,10 +307,11 @@ private fun PermissionCard(
                 FilledTonalButton(
                     onClick = onRequest,
                     colors = ButtonDefaults.filledTonalButtonColors(
-                        containerColor = Secondary.copy(alpha = 0.3f)
+                        containerColor = Secondary,
+                        contentColor = Color.White
                     )
                 ) {
-                    Text("אשר", color = Color.White)
+                    Text("אשר")
                 }
             }
         }

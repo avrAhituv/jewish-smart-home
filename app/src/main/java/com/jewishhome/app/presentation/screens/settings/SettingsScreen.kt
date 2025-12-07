@@ -174,13 +174,13 @@ private fun SettingsCategoryCard(
             Text(
                 category.hebrewName,
                 style = MaterialTheme.typography.titleLarge,
-                color = Color.White
+                color = TextPrimary
             )
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 Icons.Default.ChevronLeft,
                 contentDescription = null,
-                tint = Color.White.copy(alpha = 0.5f)
+                tint = TextSecondary
             )
         }
     }
@@ -237,12 +237,12 @@ private fun LocationCard(
                 Text(
                     location.name,
                     style = MaterialTheme.typography.titleMedium,
-                    color = Color.White
+                    color = if (isSelected) Color.White else TextPrimary
                 )
                 Text(
                     "${location.hebrewName} • ${String.format("%.2f", location.latitude)}°N",
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.White.copy(alpha = 0.7f)
+                    color = if (isSelected) Color.White.copy(alpha = 0.7f) else TextSecondary
                 )
             }
         }
@@ -435,7 +435,7 @@ private fun TextsSettings(
                 Column {
                     Text(
                         "גודל: ${fontSize.toInt()}",
-                        color = Color.White,
+                        color = TextPrimary,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
                     Slider(
@@ -500,15 +500,15 @@ private fun KioskSettings(
                     Icon(Icons.Default.Pin, null, tint = Secondary)
                     Spacer(modifier = Modifier.width(16.dp))
                     Column {
-                        Text("קוד PIN", style = MaterialTheme.typography.titleMedium, color = Color.White)
+                        Text("קוד PIN", style = MaterialTheme.typography.titleMedium, color = TextPrimary)
                         Text(
                             "****",
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.White.copy(alpha = 0.7f)
+                            color = TextSecondary
                         )
                     }
                     Spacer(modifier = Modifier.weight(1f))
-                    Icon(Icons.Default.Edit, null, tint = Color.White.copy(alpha = 0.5f))
+                    Icon(Icons.Default.Edit, null, tint = TextSecondary)
                 }
             }
         }
@@ -616,7 +616,7 @@ private fun RadioOption(
             colors = RadioButtonDefaults.colors(selectedColor = Secondary)
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text, color = Color.White)
+        Text(text, color = TextPrimary)
     }
 }
 
@@ -639,7 +639,7 @@ private fun SettingsSwitchItem(
             Text(
                 title,
                 style = MaterialTheme.typography.titleMedium,
-                color = Color.White,
+                color = TextPrimary,
                 modifier = Modifier.weight(1f)
             )
             Switch(
