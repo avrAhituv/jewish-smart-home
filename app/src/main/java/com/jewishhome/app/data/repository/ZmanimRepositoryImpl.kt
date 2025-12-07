@@ -102,7 +102,9 @@ class ZmanimRepositoryImpl @Inject constructor(
         location: GeoLocation,
         calculationMethod: ZmanimCalculationMethod
     ): Zman? = withContext(Dispatchers.Default) {
-        val now = LocalDateTime.now()
+        // Use Israel time zone
+        val now = java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
+            .toLocalDateTime()
         val today = LocalDate.now()
         val zmanimCalendar = createZmanimCalendar(today, location)
         val zmanim = buildZmanimList(zmanimCalendar, calculationMethod)

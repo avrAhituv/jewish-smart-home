@@ -64,8 +64,9 @@ class ZmanimViewModel @Inject constructor(
 
             try {
                 val today = LocalDate.now()
-                // Use Israel time zone for current time comparison
-                val now = LocalDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
+                // Use Israel time zone with proper offset for current time comparison
+                val now = java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
+                    .toLocalDateTime()
 
                 // Get daily zmanim
                 val dailyZmanim = zmanimRepository.getDailyZmanim(

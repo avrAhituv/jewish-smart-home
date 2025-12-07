@@ -48,6 +48,7 @@ class HomeViewModel @Inject constructor(
         android.util.Log.d("HomeViewModel", "HomeViewModel initialized")
         loadLocation()
         startClock()
+        startZmanimRefresh()
     }
 
     private fun loadLocation() {
@@ -60,8 +61,9 @@ class HomeViewModel @Inject constructor(
     private fun startClock() {
         viewModelScope.launch {
             while (true) {
-                // Use Israel time zone
-                val now = LocalDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
+                // Use Israel time zone with proper offset
+                val now = java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
+                    .toLocalDateTime()
                 _uiState.update { state ->
                     state.copy(
                         currentTime = now.format(timeFormatter),
@@ -69,6 +71,16 @@ class HomeViewModel @Inject constructor(
                     )
                 }
                 delay(1000)
+            }
+        }
+    }
+
+    private fun startZmanimRefresh() {
+        viewModelScope.launch {
+            while (true) {
+                // Refresh zmanim every 5 minutes
+                delay(5 * 60 * 1000)
+                loadZmanimData()
             }
         }
     }
@@ -87,8 +99,9 @@ class HomeViewModel @Inject constructor(
                 val nextZman = zmanimRepository.getNextZman(currentLocation)
                 android.util.Log.d("HomeViewModel", "Next zman: ${nextZman?.hebrewName}")
 
-                // Use Israel time zone
-                val now = LocalDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
+                // Use Israel time zone with proper offset
+                val now = java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
+                    .toLocalDateTime()
                 val timeUntil = nextZman?.time?.let { zmanTime ->
                     val duration = Duration.between(now, zmanTime)
                     val hours = duration.toHours()
