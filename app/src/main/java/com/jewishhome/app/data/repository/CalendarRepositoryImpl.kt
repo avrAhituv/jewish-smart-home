@@ -151,7 +151,7 @@ class CalendarRepositoryImpl @Inject constructor(
 
                 val hebrewDate = HebrewDate(
                     day = jewishCal.jewishDayOfMonth,
-                    month = HebrewMonth.entries.getOrNull(jewishCal.jewishMonth - 1) ?: HebrewMonth.NISAN,
+                    month = HebrewMonth.fromKosherJava(jewishCal.jewishMonth, jewishCal.isJewishLeapYear),
                     year = jewishCal.jewishYear,
                     dayOfWeek = HebrewDayOfWeek.fromDayOfWeek(date.dayOfWeek)
                 )
@@ -275,7 +275,7 @@ class CalendarRepositoryImpl @Inject constructor(
         MonthInfo(
             gregorianMonth = month,
             gregorianYear = year,
-            hebrewMonth = HebrewMonth.entries.getOrNull(jewishCal.jewishMonth - 1) ?: HebrewMonth.NISAN,
+            hebrewMonth = HebrewMonth.fromKosherJava(jewishCal.jewishMonth, jewishCal.isJewishLeapYear),
             hebrewYear = jewishCal.jewishYear,
             days = days
         )
