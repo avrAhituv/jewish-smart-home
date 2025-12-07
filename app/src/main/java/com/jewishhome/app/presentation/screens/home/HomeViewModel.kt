@@ -61,9 +61,8 @@ class HomeViewModel @Inject constructor(
     private fun startClock() {
         viewModelScope.launch {
             while (true) {
-                // Use Israel time zone with proper offset
-                val now = java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
-                    .toLocalDateTime()
+                // Use device's time zone
+                val now = LocalDateTime.now()
                 _uiState.update { state ->
                     state.copy(
                         currentTime = now.format(timeFormatter),
@@ -99,9 +98,8 @@ class HomeViewModel @Inject constructor(
                 val nextZman = zmanimRepository.getNextZman(currentLocation)
                 android.util.Log.d("HomeViewModel", "Next zman: ${nextZman?.hebrewName}")
 
-                // Use Israel time zone with proper offset
-                val now = java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
-                    .toLocalDateTime()
+                // Use device's current time
+                val now = LocalDateTime.now()
                 val timeUntil = nextZman?.time?.let { zmanTime ->
                     val duration = Duration.between(now, zmanTime)
                     val hours = duration.toHours()
