@@ -252,6 +252,9 @@ class ZmanimRepositoryImpl @Inject constructor(
     }
 
     private fun Date.toLocalDateTime(): LocalDateTime {
-        return this.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+        // Use the time zone from the current location (which is Asia/Jerusalem for Israel)
+        return this.toInstant()
+            .atZone(ZoneId.of("Asia/Jerusalem"))
+            .toLocalDateTime()
     }
 }

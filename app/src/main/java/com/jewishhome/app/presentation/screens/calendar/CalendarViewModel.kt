@@ -23,6 +23,7 @@ class CalendarViewModel @Inject constructor(
     val uiState: StateFlow<CalendarUiState> = _uiState.asStateFlow()
 
     init {
+        android.util.Log.d("CalendarViewModel", "CalendarViewModel initialized")
         loadCurrentMonth()
         loadUpcomingEvents()
         observeCalendars()
@@ -42,11 +43,15 @@ class CalendarViewModel @Inject constructor(
     }
 
     fun selectMonth(year: Int, month: Int) {
+        android.util.Log.d("CalendarViewModel", "selectMonth: $year/$month")
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true)
             try {
+                android.util.Log.d("CalendarViewModel", "Loading month info...")
                 val monthInfo = calendarRepository.getMonthInfo(year, month)
+                android.util.Log.d("CalendarViewModel", "Month info loaded: ${monthInfo.days.size} days")
                 val holidays = calendarRepository.getJewishHolidaysForMonth(year, month)
+                android.util.Log.d("CalendarViewModel", "Holidays loaded: ${holidays.size} holidays")
 
                 _uiState.value = _uiState.value.copy(
                     currentMonth = monthInfo,
@@ -56,6 +61,7 @@ class CalendarViewModel @Inject constructor(
                     isLoading = false
                 )
             } catch (e: Exception) {
+                android.util.Log.e("CalendarViewModel", "Error loading month", e)
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     error = e.message
