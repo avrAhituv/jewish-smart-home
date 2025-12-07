@@ -167,7 +167,10 @@ class ZmanimRepositoryImpl @Inject constructor(
     }
 
     private fun createJewishCalendar(date: LocalDate): JewishCalendar {
-        return JewishCalendar(date.year, date.monthValue, date.dayOfMonth)
+        // JewishCalendar expects: (gregorianYear, gregorianMonth (1-based), gregorianDayOfMonth)
+        return JewishCalendar().apply {
+            setGregorianDate(date.year, date.monthValue - 1, date.dayOfMonth)
+        }
     }
 
     private fun convertToHebrewDate(jewishCalendar: JewishCalendar): HebrewDate {

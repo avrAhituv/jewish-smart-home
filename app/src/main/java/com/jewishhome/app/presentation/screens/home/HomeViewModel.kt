@@ -45,6 +45,7 @@ class HomeViewModel @Inject constructor(
     private var currentLocation: GeoLocation = GeoLocation.JERUSALEM
 
     init {
+        android.util.Log.d("HomeViewModel", "HomeViewModel initialized")
         loadLocation()
         startClock()
     }
@@ -72,13 +73,18 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun loadZmanimData() {
+        android.util.Log.d("HomeViewModel", "loadZmanimData started")
         viewModelScope.launch {
             try {
                 // Get Hebrew date
+                android.util.Log.d("HomeViewModel", "Getting Hebrew date...")
                 val hebrewDate = zmanimRepository.getHebrewDate(java.time.LocalDate.now())
+                android.util.Log.d("HomeViewModel", "Hebrew date: ${hebrewDate.toFullHebrewString()}")
 
                 // Get next zman
+                android.util.Log.d("HomeViewModel", "Getting next zman for location: ${currentLocation.hebrewName}")
                 val nextZman = zmanimRepository.getNextZman(currentLocation)
+                android.util.Log.d("HomeViewModel", "Next zman: ${nextZman?.hebrewName}")
 
                 val now = LocalDateTime.now()
                 val timeUntil = nextZman?.time?.let { zmanTime ->
@@ -92,6 +98,7 @@ class HomeViewModel @Inject constructor(
                     }
                 } ?: ""
 
+                android.util.Log.d("HomeViewModel", "Updating UI state...")
                 _uiState.update { state ->
                     state.copy(
                         hebrewDate = hebrewDate.toFullHebrewString(),
@@ -100,6 +107,7 @@ class HomeViewModel @Inject constructor(
                         timeUntilNextZman = timeUntil
                     )
                 }
+                android.util.Log.d("HomeViewModel", "UI state updated successfully")
             } catch (e: Exception) {
                 // Log the error for debugging
                 android.util.Log.e("HomeViewModel", "Error loading zmanim data", e)

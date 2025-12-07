@@ -144,7 +144,9 @@ class CalendarRepositoryImpl @Inject constructor(
 
         for (day in 1..daysInMonth) {
             val date = LocalDate.of(year, month, day)
-            val jewishCal = JewishCalendar(date.year, date.monthValue, date.dayOfMonth)
+            val jewishCal = JewishCalendar().apply {
+                setGregorianDate(date.year, date.monthValue - 1, date.dayOfMonth)
+            }
 
             if (jewishCal.isYomTov || jewishCal.isChanukah || jewishCal.isPurim ||
                 jewishCal.isRoshChodesh || jewishCal.isTaanis || jewishCal.isErevYomTov) {
