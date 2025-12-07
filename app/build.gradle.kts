@@ -125,6 +125,27 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
 
+    // Google Play Services & APIs
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("com.google.android.gms:play-services-location:21.1.0")
+    implementation("com.google.http-client:google-http-client-gson:1.43.3")
+    implementation("com.google.http-client:google-http-client-android:1.43.3")
+    implementation("com.google.apis:google-api-services-calendar:v3-rev20230825-2.0.0") {
+        exclude(group = "org.apache.httpcomponents")
+    }
+    implementation("com.google.apis:google-api-services-people:v1-rev20230702-2.0.0") {
+        exclude(group = "org.apache.httpcomponents")
+    }
+    implementation("com.google.apis:google-api-services-photoslibrary:v1-rev20230710-2.0.0") {
+        exclude(group = "org.apache.httpcomponents")
+    }
+
+    // Fonts
+    implementation("androidx.compose.ui:ui-text-google-fonts:1.5.4")
+
+    // Work Manager for background tasks
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
     // Testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")

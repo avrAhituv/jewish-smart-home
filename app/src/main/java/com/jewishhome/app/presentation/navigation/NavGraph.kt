@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
+import androidx.navigation.AnimatedContentTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -80,7 +82,31 @@ fun JewishHomeNavHost(
         // Main navigation content
         NavHost(
             navController = navController,
-            startDestination = startDestination
+            startDestination = startDestination,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(300)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(300)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Start,
+                    animationSpec = tween(300)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.End,
+                    animationSpec = tween(300)
+                )
+            }
         ) {
             composable(Screen.Permissions.route) {
                 PermissionsScreen(

@@ -1,6 +1,8 @@
 package com.jewishhome.app.di
 
 import android.content.Context
+import androidx.room.Room
+import com.jewishhome.app.data.local.db.AppDatabase
 import com.jewishhome.app.data.local.preferences.UserPreferences
 import com.jewishhome.app.data.repository.CalendarRepositoryImpl
 import com.jewishhome.app.data.repository.ContactsRepositoryImpl
@@ -34,6 +36,20 @@ object AppModule {
     fun provideUserPreferences(@ApplicationContext context: Context): UserPreferences {
         return UserPreferences(context)
     }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "jewish_home_db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun providePlaylistDao(database: AppDatabase) = database.playlistDao()
 
     @Provides
     @Singleton

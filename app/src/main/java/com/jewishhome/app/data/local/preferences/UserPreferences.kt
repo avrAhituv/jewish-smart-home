@@ -51,6 +51,11 @@ class UserPreferences @Inject constructor(
 
         // Font Size for texts
         private val FONT_SIZE = floatPreferencesKey("font_size")
+
+        // Google Auth
+        private val GOOGLE_ACCOUNT_EMAIL = stringPreferencesKey("google_account_email")
+        private val GOOGLE_ACCOUNT_NAME = stringPreferencesKey("google_account_name")
+        private val GOOGLE_ID_TOKEN = stringPreferencesKey("google_id_token")
     }
 
     // Location
@@ -208,6 +213,45 @@ class UserPreferences @Inject constructor(
     suspend fun setFontSize(size: Float) {
         dataStore.edit { preferences ->
             preferences[FONT_SIZE] = size
+        }
+    }
+
+    // Google Auth
+    val googleAccountEmail: Flow<String> = dataStore.data.map { preferences ->
+        preferences[GOOGLE_ACCOUNT_EMAIL] ?: ""
+    }
+
+    suspend fun setGoogleAccountEmail(email: String) {
+        dataStore.edit { preferences ->
+            preferences[GOOGLE_ACCOUNT_EMAIL] = email
+        }
+    }
+
+    val googleAccountName: Flow<String> = dataStore.data.map { preferences ->
+        preferences[GOOGLE_ACCOUNT_NAME] ?: ""
+    }
+
+    suspend fun setGoogleAccountName(name: String) {
+        dataStore.edit { preferences ->
+            preferences[GOOGLE_ACCOUNT_NAME] = name
+        }
+    }
+
+    val googleIdToken: Flow<String> = dataStore.data.map { preferences ->
+        preferences[GOOGLE_ID_TOKEN] ?: ""
+    }
+
+    suspend fun setGoogleIdToken(token: String) {
+        dataStore.edit { preferences ->
+            preferences[GOOGLE_ID_TOKEN] = token
+        }
+    }
+
+    suspend fun clearGoogleAuthData() {
+        dataStore.edit { preferences ->
+            preferences.remove(GOOGLE_ACCOUNT_EMAIL)
+            preferences.remove(GOOGLE_ACCOUNT_NAME)
+            preferences.remove(GOOGLE_ID_TOKEN)
         }
     }
 }

@@ -34,11 +34,24 @@ val ZmanPassed = Color(0xFF9E9E9E)
 val ZmanCurrent = Color(0xFFD4AF37)
 val ZmanUpcoming = Color(0xFF1E3A5F)
 
-// Special colors
-val Shabbat = Color(0xFF6B4BA1)
-val Chag = Color(0xFFD4AF37)
+// Special colors - warmer and more welcoming
+val Shabbat = Color(0xFF8B7AB8) // Softer purple
+val ShabbatLight = Color(0xFFD4C5F9) // Light purple for accents
+val Chag = Color(0xFFE8B84D) // Warm gold
+val ChagLight = Color(0xFFFFF4CC) // Light gold
 val Tzom = Color(0xFF757575)
+
+// Night mode - warmer colors
+val NightModePrimary = Color(0xFF2A1810) // Deep warm brown
+val NightModeSecondary = Color(0xFFE8B84D) // Warm gold
+val NightModeBackground = Color(0xFF1A1410) // Very dark brown
+val NightModeOrange = Color(0xFFFF9966) // Soft orange for accents
 
 // Text colors for better contrast
 val TextPrimary = Color(0xFF1C1B1F)
 val TextSecondary = Color(0xFF5F5E62)
+
+// Gradient colors for backgrounds
+val GradientStart = Color(0xFF1E3A5F)
+val GradientMid = Color(0xFF2A4A75)
+val GradientEnd = Color(0xFF0D2137)

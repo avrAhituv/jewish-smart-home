@@ -35,6 +35,10 @@
 
     <!-- Keep screen on -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+    <!-- Alarms and notifications -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".JewishHomeApplication"
@@ -101,6 +105,11 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+
+        <!-- Zmanim Alarm Receiver -->
+        <receiver
+            android:name=".data.service.ZmanimAlarmReceiver"
+            android:exported="false" />
 
     </application>
 

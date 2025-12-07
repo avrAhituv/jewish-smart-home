@@ -142,13 +142,163 @@ data class GeoLocation(
             timeZone = TimeZone.getTimeZone("Europe/Paris")
         )
 
+        // More Israel cities
+        val REHOVOT = GeoLocation(
+            name = "Rehovot",
+            hebrewName = "רחובות",
+            latitude = 31.8947,
+            longitude = 34.8077,
+            elevation = 75.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val RAMAT_GAN = GeoLocation(
+            name = "Ramat Gan",
+            hebrewName = "רמת גן",
+            latitude = 32.0806,
+            longitude = 34.8237,
+            elevation = 70.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val HERZLIYA = GeoLocation(
+            name = "Herzliya",
+            hebrewName = "הרצליה",
+            latitude = 32.1667,
+            longitude = 34.8333,
+            elevation = 30.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val HOLON = GeoLocation(
+            name = "Holon",
+            hebrewName = "חולון",
+            latitude = 32.0167,
+            longitude = 34.7667,
+            elevation = 50.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val RAANANA = GeoLocation(
+            name = "Ra'anana",
+            hebrewName = "רעננה",
+            latitude = 32.1833,
+            longitude = 34.8667,
+            elevation = 60.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val MODIIN = GeoLocation(
+            name = "Modiin",
+            hebrewName = "מודיעין",
+            latitude = 31.8936,
+            longitude = 35.0089,
+            elevation = 245.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val KFAR_SABA = GeoLocation(
+            name = "Kfar Saba",
+            hebrewName = "כפר סבא",
+            latitude = 32.1750,
+            longitude = 34.9069,
+            elevation = 85.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val TIBERIAS = GeoLocation(
+            name = "Tiberias",
+            hebrewName = "טבריה",
+            latitude = 32.7922,
+            longitude = 35.5369,
+            elevation = -200.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val NAZARETH = GeoLocation(
+            name = "Nazareth",
+            hebrewName = "נצרת",
+            latitude = 32.7019,
+            longitude = 35.2983,
+            elevation = 350.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        val AFULA = GeoLocation(
+            name = "Afula",
+            hebrewName = "עפולה",
+            latitude = 32.6083,
+            longitude = 35.2889,
+            elevation = 60.0,
+            timeZone = TimeZone.getTimeZone("Asia/Jerusalem")
+        )
+
+        // US cities
+        val MIAMI = GeoLocation(
+            name = "Miami",
+            hebrewName = "מיאמי",
+            latitude = 25.7617,
+            longitude = -80.1918,
+            elevation = 2.0,
+            timeZone = TimeZone.getTimeZone("America/New_York")
+        )
+
+        val CHICAGO = GeoLocation(
+            name = "Chicago",
+            hebrewName = "שיקגו",
+            latitude = 41.8781,
+            longitude = -87.6298,
+            elevation = 181.0,
+            timeZone = TimeZone.getTimeZone("America/Chicago")
+        )
+
+        val TORONTO = GeoLocation(
+            name = "Toronto",
+            hebrewName = "טורונטו",
+            latitude = 43.6532,
+            longitude = -79.3832,
+            elevation = 76.0,
+            timeZone = TimeZone.getTimeZone("America/Toronto")
+        )
+
+        val MONTREAL = GeoLocation(
+            name = "Montreal",
+            hebrewName = "מונטריאול",
+            latitude = 45.5017,
+            longitude = -73.5673,
+            elevation = 36.0,
+            timeZone = TimeZone.getTimeZone("America/Montreal")
+        )
+
+        // Europe
+        val AMSTERDAM = GeoLocation(
+            name = "Amsterdam",
+            hebrewName = "אמסטרדם",
+            latitude = 52.3676,
+            longitude = 4.9041,
+            elevation = -2.0,
+            timeZone = TimeZone.getTimeZone("Europe/Amsterdam")
+        )
+
+        val MANCHESTER = GeoLocation(
+            name = "Manchester",
+            hebrewName = "מנצ'סטר",
+            latitude = 53.4808,
+            longitude = -2.2426,
+            elevation = 38.0,
+            timeZone = TimeZone.getTimeZone("Europe/London")
+        )
+
         /**
          * All predefined locations
          */
         val ALL_LOCATIONS = listOf(
             JERUSALEM, TEL_AVIV, HAIFA, BEER_SHEVA, BNEI_BRAK,
             PETAH_TIKVA, ASHDOD, NETANYA, EILAT, TZFAT,
-            NEW_YORK, LOS_ANGELES, LONDON, PARIS
+            REHOVOT, RAMAT_GAN, HERZLIYA, HOLON, RAANANA,
+            MODIIN, KFAR_SABA, TIBERIAS, NAZARETH, AFULA,
+            NEW_YORK, LOS_ANGELES, MIAMI, CHICAGO, TORONTO, MONTREAL,
+            LONDON, PARIS, AMSTERDAM, MANCHESTER
         )
 
         /**
@@ -156,7 +306,9 @@ data class GeoLocation(
          */
         val ISRAEL_LOCATIONS = listOf(
             JERUSALEM, TEL_AVIV, HAIFA, BEER_SHEVA, BNEI_BRAK,
-            PETAH_TIKVA, ASHDOD, NETANYA, EILAT, TZFAT
+            PETAH_TIKVA, ASHDOD, NETANYA, EILAT, TZFAT,
+            REHOVOT, RAMAT_GAN, HERZLIYA, HOLON, RAANANA,
+            MODIIN, KFAR_SABA, TIBERIAS, NAZARETH, AFULA
         )
     }
 }
