@@ -113,15 +113,7 @@ fun ScreensaverScreen(
                     Row(
                         verticalAlignment = Alignment.Bottom
                     ) {
-                        Text(
-                            text = uiState.currentTime,
-                            style = MaterialTheme.typography.displayLarge.copy(
-                                fontSize = 140.sp,
-                                fontWeight = FontWeight.Thin,
-                                letterSpacing = (-4).sp
-                            ),
-                            color = Color.White
-                        )
+                        // Seconds on the right for RTL
                         Text(
                             text = uiState.currentSeconds,
                             style = MaterialTheme.typography.displayMedium.copy(
@@ -130,6 +122,15 @@ fun ScreensaverScreen(
                             ),
                             color = Color.White.copy(alpha = 0.6f),
                             modifier = Modifier.padding(bottom = 24.dp)
+                        )
+                        Text(
+                            text = uiState.currentTime,
+                            style = MaterialTheme.typography.displayLarge.copy(
+                                fontSize = 140.sp,
+                                fontWeight = FontWeight.Thin,
+                                letterSpacing = (-4).sp
+                            ),
+                            color = Color.White
                         )
                     }
 

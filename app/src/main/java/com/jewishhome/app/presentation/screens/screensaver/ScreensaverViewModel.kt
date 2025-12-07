@@ -79,7 +79,8 @@ class ScreensaverViewModel @Inject constructor(
     private fun startClock() {
         viewModelScope.launch {
             while (true) {
-                val now = LocalDateTime.now()
+                // Use Israel time zone
+                val now = LocalDateTime.now(java.time.ZoneId.of("Asia/Jerusalem"))
                 val time24 = now.format(DateTimeFormatter.ofPattern("HH:mm"))
                 val time12 = now.format(DateTimeFormatter.ofPattern("h:mm a"))
                 val seconds = now.format(DateTimeFormatter.ofPattern(":ss"))
