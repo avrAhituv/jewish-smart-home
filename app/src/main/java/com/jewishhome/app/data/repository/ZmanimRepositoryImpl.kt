@@ -171,13 +171,25 @@ class ZmanimRepositoryImpl @Inject constructor(
     }
 
     private fun convertToHebrewDate(jewishCalendar: JewishCalendar): HebrewDate {
+        // KosherJava uses 1=Sunday, 7=Saturday
+        // Java DayOfWeek uses 1=Monday, 7=Sunday
+        // So we need to convert: KosherJava 1-7 -> Java 7,1,2,3,4,5,6
+        val javaDayOfWeek = when (jewishCalendar.dayOfWeek) {
+            1 -> java.time.DayOfWeek.SUNDAY
+            2 -> java.time.DayOfWeek.MONDAY
+            3 -> java.time.DayOfWeek.TUESDAY
+            4 -> java.time.DayOfWeek.WEDNESDAY
+            5 -> java.time.DayOfWeek.THURSDAY
+            6 -> java.time.DayOfWeek.FRIDAY
+            7 -> java.time.DayOfWeek.SATURDAY
+            else -> java.time.DayOfWeek.SUNDAY
+        }
+        
         return HebrewDate(
             day = jewishCalendar.jewishDayOfMonth,
             month = HebrewMonth.fromKosherJava(jewishCalendar.jewishMonth, jewishCalendar.isJewishLeapYear),
             year = jewishCalendar.jewishYear,
-            dayOfWeek = HebrewDayOfWeek.fromDayOfWeek(
-                java.time.DayOfWeek.of(if (jewishCalendar.dayOfWeek == 7) 7 else jewishCalendar.dayOfWeek)
-            ),
+            dayOfWeek = HebrewDayOfWeek.fromDayOfWeek(javaDayOfWeek),
             isLeapYear = jewishCalendar.isJewishLeapYear
         )
     }

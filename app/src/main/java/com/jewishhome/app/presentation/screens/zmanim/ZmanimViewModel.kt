@@ -104,10 +104,11 @@ class ZmanimViewModel @Inject constructor(
                     )
                 }
             } catch (e: Exception) {
+                android.util.Log.e("ZmanimViewModel", "Error loading zmanim", e)
                 _uiState.update { state ->
                     state.copy(
                         isLoading = false,
-                        error = e.message ?: "שגיאה בטעינת הזמנים"
+                        error = "שגיאה בטעינת הזמנים: ${e.message}"
                     )
                 }
             }

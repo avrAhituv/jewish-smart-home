@@ -101,11 +101,23 @@ class HomeViewModel @Inject constructor(
                     )
                 }
             } catch (e: Exception) {
-                // Fallback to placeholder data on error
-                _uiState.update { state ->
-                    state.copy(
-                        hebrewDate = "שגיאה בטעינת התאריך"
-                    )
+                // Log the error for debugging
+                android.util.Log.e("HomeViewModel", "Error loading zmanim data", e)
+                // Try to at least show the date even if zmanim fail
+                try {
+                    val hebrewDate = zmanimRepository.getHebrewDate(java.time.LocalDate.now())
+                    _uiState.update { state ->
+                        state.copy(
+                            hebrewDate = hebrewDate.toFullHebrewString()
+                        )
+                    }
+                } catch (dateError: Exception) {
+                    android.util.Log.e("HomeViewModel", "Error loading hebrew date", dateError)
+                    _uiState.update { state ->
+                        state.copy(
+                            hebrewDate = "תאריך עברי"
+                        )
+                    }
                 }
             }
         }
